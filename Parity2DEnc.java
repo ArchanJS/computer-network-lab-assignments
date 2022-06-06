@@ -1,50 +1,51 @@
 import java.util.*;
 
-//Even 2D parity (Encoding)
-public class Parity2DEnc {
-    private char data[][];
-    public Parity2DEnc(String data){
-        this.data=new char[5][5];
-        int charIdx=0;
-        for(int i=0;i<5;i++){
-            for(int j=0;j<5;j++){
-                if(j==4 || i==4) this.data[i][j]='0';
-                else {
-                    this.data[i][j]=data.charAt(charIdx);
-                    charIdx++;
-                }
+public class Parity2DEnc{
+    private char[][] data;
+    private int seg;
+    public Parity2DEnc(String s,int seg){
+        this.seg=seg;
+        int m=seg+1,n=(s.length()/seg)+1;
+        this.data=new char[n][m];
+        int idx=0;
+        for(int i=0;i<n-1;i++){
+            for(int j=0;j<m-1;j++){
+                this.data[i][j]=s.charAt(idx);
+                idx++;
             }
         }
     }
     public void encode(){
-        for(int i=0;i<4;i++){
-            int cnt1=0;
-            for(int j=0;j<4;j++){
-                if(this.data[i][j]=='1') cnt1++;
+        int n=this.data.length,m=this.data[0].length;
+        for(int i=0;i<n-1;i++){
+            int cnt=0;
+            for(int j=0;j<m-1;j++){
+                if(this.data[i][j]=='1') cnt++;
             }
-            if(cnt1%2!=0) this.data[i][4]='1';
+            if(cnt%2==0) this.data[i][m-1]='0';
+            else this.data[i][m-1]='1';
         }
-        for(int j=0;j<5;j++){
-            int cnt1=0;
-            for(int i=0;i<4;i++){
-                if(this.data[i][j]=='1') cnt1++;
+        for(int j=0;j<m;j++){
+            int cnt=0;
+            for(int i=0;i<n-1;i++){
+                if(this.data[i][j]=='1') cnt++;
             }
-            if(cnt1%2!=0) this.data[4][j]='1';
+            if(cnt%2==0) this.data[n-1][j]='0';
+            else this.data[n-1][j]='1';
         }
-        for(int i=0;i<5;i++){
-            for(int j=0;j<5;j++){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
                 System.out.print(this.data[i][j]);
             }
+            System.out.println();
         }
     }
-
     public static void main(String args[]){
         Scanner sc=new Scanner(System.in);
-        System.out.println("Enter data:");
-        String data=sc.next();
+        String s=sc.next();
+        int seg=sc.nextInt();
         sc.close();
-        Parity2DEnc dataObj=new Parity2DEnc(data);
+        Parity2DEnc dataObj=new Parity2DEnc(s, seg);
         dataObj.encode();
     }
-
 }
