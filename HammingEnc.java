@@ -30,6 +30,7 @@ public class HammingEnc{
     public static void main(String args[]){
         Scanner sc=new Scanner(System.in);
         String data=sc.next();
+        System.out.println("Enter data: ");
         HammingEnc dataObj=new HammingEnc(data);
         dataObj.encode();
         sc.close();

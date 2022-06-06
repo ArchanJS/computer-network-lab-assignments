@@ -80,7 +80,9 @@ public class CheckSumDec {
     }
     public static void main(String args[]){
         Scanner sc=new Scanner(System.in);
+        System.out.println("Enter data: ");
         String data=sc.next();
+        System.out.println("Enter segment length: ");
         int seg=sc.nextInt();
         sc.close();
         CheckSumDec dataObj=new CheckSumDec(data, seg);

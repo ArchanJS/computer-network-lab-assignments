@@ -86,7 +86,9 @@ class CheckSumEnc{
     }
     public static void main(String args[]){
         Scanner sc=new Scanner(System.in);
+        System.out.println("Enter data: ");
         String dataStr=sc.next();
+        System.out.println("Enter segment length: ");
         int seg=sc.nextInt();
         sc.close();
         CheckSumEnc dataObj=new CheckSumEnc(dataStr,seg);
